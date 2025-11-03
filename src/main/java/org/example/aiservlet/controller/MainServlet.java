@@ -36,7 +36,8 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String textParam = req.getParameter("text"); // form = post, input name=text
-        String answer = ai.chat( "%s, 꾸미는 텍스트 없이.".formatted(textParam));
+//        String answer = ai.chat( "%s, 꾸미는 텍스트 없이.".formatted(textParam));
+        String answer = ai.chatByGroq( "%s, 꾸미는 텍스트 없이.".formatted(textParam));
         req.setAttribute("title", "'%s'에 대한 AI의 답".formatted(textParam));
         req.setAttribute("answer", answer);
         req.getRequestDispatcher("/WEB-INF/chat.jsp").forward(req, resp);
