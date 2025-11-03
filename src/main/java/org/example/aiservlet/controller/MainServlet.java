@@ -26,7 +26,16 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String answer = ai.chat("저녁 메뉴 추천, 메뉴만 20자 이내로. 꾸미는 텍스트 없이.");
+//        String answer = ai.chat("저녁 메뉴 추천, 메뉴만 20자 이내로. 꾸미는 텍스트 없이.");
+//        req.setAttribute("answer", answer);
+        req.setAttribute("answer", "질문을 입력해보세요!");
+        req.getRequestDispatcher("/WEB-INF/chat.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String textParam = req.getParameter("text"); // form = post, input name=text
+        String answer = ai.chat( "%s, 꾸미는 텍스트 없이.".formatted(textParam));
         req.setAttribute("answer", answer);
         req.getRequestDispatcher("/WEB-INF/chat.jsp").forward(req, resp);
     }
